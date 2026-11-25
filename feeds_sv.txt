@@ -1,0 +1,20 @@
+#Verifierade svenska RSS-flöden (icke-SR), kontrollerade 2026-11-25.
+# Kopiera till feeds.txt och kommentera bort det du inte vill köra.
+
+# --- Acast (Sveriges största poddhost; flödet är alltid publikt) ---
+https://feeds.acast.com/public/shows/d826bce9-27ec-46d1-89f7-306cc3c0416a   # Spår (true crime)
+https://feeds.acast.com/public/shows/3544984e-0e49-4fcd-9bfd-f10a04b60e71   # Historiepodden
+https://feeds.acast.com/public/shows/bf4e5114-fe02-4088-9a07-c1b81a3c615a    # Värvet
+https://feeds.acast.com/public/shows/69ca734c98052f52e8b34a04               # Fredagspodden
+https://feeds.acast.com/public/shows/643c05f1672f9f0011674bea               # Kungar och krig (historia)
+https://feeds.acast.com/public/shows/634fff82ea47f10012bfb273               # Dagens Juridik
+https://feeds.acast.com/public/shows/62d1f29df280fb0013f8a8a5               # Svenska brott (true crime)
+
+# --- Podspace (svensk host: Bonnier News, Kvartal m.fl.) ---
+https://feed.pod.space/dimorgonkoll    # Dagen med Di
+https://feed.pod.space/inlastatexter   # Inlästa texter (Kvartal)
+https://feed.pod.space/borsmorgon      # Börsmorgon
+
+# --- Libsyn (fristående producenter) ---
+https://sakerhetspodcasten.libsyn.com/rss   # Säkerhetspodcasten
+https://mandag.libsyn.com/rss               # MÅNDAG
