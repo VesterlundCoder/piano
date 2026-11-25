@@ -1,0 +1,9 @@
+# En RSS-URL per rad. Rader som börjar med # ignoreras.
+#
+# Hitta en pods RSS-flöde:
+#   - i de flesta poddappar: delad länk / "kopiera flödesadress"
+#   - eller sök: "<podnamn> rss feed" (många producenter publicerar flödet öppet)
+#   - Sveriges Radio har flöden på formen https://api.sr.se/api/podcast/<programid>.rss
+#
+# Exempel (byt ut mot dina egna):
+# https://example.com/podcasts/minpodd.rss

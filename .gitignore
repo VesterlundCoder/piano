@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+audio/
+transcripts/
+state/
+STOP
+feeds.txt

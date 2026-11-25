@@ -1,0 +1,5 @@
+parakeet-mlx==0.5.2
+huggingface_hub
+sentencepiece
+numpy
+feedparser
