@@ -1,0 +1,27 @@
+1
+00:00:01,000 --> 00:00:04,000
+I natt stängdes hamnen i Göteborg
+efter ett stort strömavbrott.
+
+2
+00:00:04,500 --> 00:00:07,000
+Vår reporter är på plats. Vad har hänt?
+
+3
+00:00:07,200 --> 00:00:11,000
+Strömmen gick strax efter midnatt
+och det är fortfarande mörkt här.
+
+4
+00:00:11,500 --> 00:00:13,000
+- Hur länge väntas det pågå?
+- Ingen vet riktigt.
+
+5
+00:00:13,500 --> 00:00:17,000
+Elbolaget säger att de jobbar för fullt
+men ger inget besked om när strömmen är tillbaka.
+
+6
+00:00:17,500 --> 00:00:19,000
+Tack för det. Vi återkommer senare i sändningen.

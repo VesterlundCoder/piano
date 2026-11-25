@@ -1,0 +1,66 @@
+# Konfiguration för diarize.py
+# Kör: python3 diarize.py --config config.toml --input data/ --output ut/
+
+[llm]
+# Valfri OpenAI-kompatibel server.
+#   Ollama:     http://localhost:11434/v1
+#   LM Studio:  http://localhost:1234/v1
+#   llama.cpp:  http://localhost:8080/v1
+#   vLLM:       http://<nod>:8000/v1   (t.ex. på LUMI vid storskalig körning)
+base_url = "http://localhost:11434/v1"
+model = "qwen3-4b-8k"   # skapad ur qwen3:4b-instruct med num_ctx 8192 (se Modelfile.8k)
+api_key = "lokal"            # ignoreras av lokala servrar
+temperature = 0.0
+max_tokens = 2048
+timeout_s = 300
+json_mode = true             # stängs av automatiskt om servern inte stöder det
+retries = 2                  # nya försök per avsnitt vid ogiltigt svar
+
+[chunking]
+chunk_sentences = 30         # meningar per LLM-anrop
+max_chunk_words = 500        # tak för ord per anrop (håller kontexten under ~4k tokens)
+context_sentences = 6        # redan märkta meningar som visas som sammanhang
+max_sentence_words = 45      # längre "meningar" (ASR utan skiljetecken) delas upp
+
+[diarization]
+max_speakers = 8
+monolog_share = 0.97         # om en talare har >= 97 % av meningarna räknas det som monolog
+max_unknown_share = 0.20     # mer "?" än så ger typ = ej_separerad
+max_failed_chunk_share = 0.20
+max_high_uncertainty_share = 0.50
+# Källor (mappnamn eller "source"-fält) som alltid är monolog och därför hoppar över LLM:en
+monolog_sources = ["ljudbok", "forelasning", "föreläsning", "predikan", "uppläsning", "dagens-dikt", "helgsmål"]
+# Om en .txt redan har talaretiketter ("Anna: ...") används de direkt.
+# false = byt ut namnen mot "Talare 1", "Talare 2" ... (rekommenderas av integritetsskäl)
+keep_existing_names = false
+
+[filter]
+min_words = 40               # kortare dokument kastas
+max_dropped_share = 0.30     # om mer än så filtrerats bort kastas dokumentet
+compression_ratio_max = 2.4  # samma tröskel som Whisper använder för att upptäcka loopar
+min_words_for_duplicate_check = 4
+# Kända Whisper-hallucinationer. Matchas bara i korta meningar (<= 12 ord).
+# Lägg till det du hittar i datan.
+hallucination_patterns = [
+  "textning\\.nu",
+  "svensktextning",
+  "undertext(er|ning) (från|av)",
+  "amara\\.org",
+  "tack för att (du|ni) (tittade|tittat|såg|sett)",
+  "prenumerera på (kanalen|min kanal)",
+  "glöm inte att prenumerera",
+  "teksting av",
+  "tekster af",
+  "danske tekster",
+  "norske tekster",
+  "tekstitys",
+  "subtitles by",
+]
+
+[output]
+# Rubrik först i varje dokument. Behåll samma rubrikformat som ni använder i resten av korpusen.
+header_template = "[källa: {source} | typ: {type} | talare: {n_speakers} | språk: {language} | transkriberat tal]"
+default_language = "sv"
+source_from = "parent_dir"   # "parent_dir" = mappnamnet blir källa (om jsonl saknar "source")
+monolog_paragraph_sentences = 6   # styckebrytning i monologer från undertexter
+review_sample_size = 30

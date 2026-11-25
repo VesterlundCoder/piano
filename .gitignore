@@ -6,3 +6,6 @@ transcripts/
 state/
 STOP
 feeds.txt
+diarisering/ut*/
+diarisering/data*/
+diarisering/__pycache__/

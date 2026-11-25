@@ -51,6 +51,30 @@ Sveriges Radios flöden ligger på formen `https://api.sr.se/api/podcast/<progra
 - För andra språk än svenska: Pianissimo är en svensk modell — transkript av
   andra språk blir dåligt.
 
+## Diarisering av transkript (`diarisering/`)
+
+Undermappen `diarisering/` lägger talarbyten på redan transkriberad text med
+en lokal LLM: meningsdelning → filtrering av ASR-hallucinationer → LLM märker
+varje mening med `Talare 1:`/`Talare 2:` → träningsklar text med rubrik
+(monolog/dialog/ej_separerad). Se `diarisering/LÄSMIG.md` för detaljer.
+
+```bash
+cd diarisering
+ollama pull qwen3:4b-instruct                       # ~3-4B, icke-tänkande
+ollama create qwen3-4b-8k -f Modelfile.8k           # baka in 8k-kontext (krävs)
+python3 diarize.py --config config.toml --input exempel --output ut_test   # röktest
+
+# SR-transkript från piano-pipelinen (stripar metadatarubriken):
+python3 transkript_till_diarize.py --input ../transcripts --output data \
+    --program spanarna ekots-lördagsintervju --limit 5
+python3 diarize.py --config config.toml --input data --output ut
+```
+
+Körningen är återstartbar (hoppas över klara dokument), stoppas mjukt med
+Ctrl-C, och `--estimate --gen-tps 30` ger en tidsuppskattning före stor körning.
+Vid storskalig körning: peka `base_url` i `config.toml` mot en vLLM-server
+och kör med `--workers 16–64` — inget annat behöver ändras.
+
 ## Filstruktur
 
 ```
